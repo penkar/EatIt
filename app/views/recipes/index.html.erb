@@ -1,4 +1,10 @@
 
 
+<p><%= @recipe.first.key %></p>
 
-<p><%= @recipe %></p>
+<div ng-app='MyModule'>
+    <div ng-controller='DefaultCtrl'>
+        <input auto-complete ui-items="names" ng-model="selected">
+        selected = {{selected}}
+    </div>
+</div>
