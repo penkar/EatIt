@@ -1,0 +1,1 @@
+MongoMapper.database = "eat_it_app_development"
