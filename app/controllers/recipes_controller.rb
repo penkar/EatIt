@@ -6,7 +6,7 @@ class RecipesController < ApplicationController
 
 	def find
 		title = params[:recipe_title]
-		match = eval(Recipe.all(:title => title).first.match).sort_by{|x,y| y}.map{|x| x[0].to_i}
+		match = eval(Recipe.all(:title => title).first.match).sort_by{|x,y| -y}.map{|x| x[0].to_i}
 		recipes = match.map{|key| Recipe.all(:key => key).first}
 		render :json => { recipe_list_relations: recipes }
 	end
