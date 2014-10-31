@@ -12,13 +12,19 @@ var recipeTitles = <%= @recipe_title.to_json.html_safe %>
     <div class="" ng-show="recipe">
       You selected <span class="bold-span">{{recipe.originalObject.name}}</span> 
       Of the ingredients included, which would you not like to see again?
-      <form name="ingredientForm">
+
+
+      <%= form_for @find, remote: true do |f| %>
+      <% end %>
+
+      <form name="ingredientForm" data-remote="true" method="post" action="/find" id="aaaa" >
+      	<input type="hidden" value="{{recipe.originalObject.name}}" name="recipe_title"></input>
 	      <span class="bold-span" ng-repeat="ingredient in recipe.originalObject.ingredients">
 	      	<p class="ingredient">{{ingredient}}<input type="checkbox" name="{{ingredient}}" value="{{ingredient}}"></input></p>
 	      </span>
 	      What ingredient would you be interested in seeing?
 	      <input id="ingredientInput" type="textarea" placeholder="Desired Ingredient"></input>
-	      <input type="submit" value="submit" class="submit-button">
+	      <input type="submit" value="submit" class="submit-button"></input>
       </form>
 		</div>
 	</div>
