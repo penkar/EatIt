@@ -1,10 +1,25 @@
+<script>
+var recipeTitles = <%= @recipe_title.to_json.html_safe %>
+</script>
 
 
-<p><%= @recipe.first.key %></p>
-
-<div ng-app='MyModule'>
-    <div ng-controller='DefaultCtrl'>
-        <input auto-complete ui-items="names" ng-model="selected">
-        selected = {{selected}}
+<div ng-controller="MainController">
+  <div class="large-padded-row">
+  <h3>What Dish do you want to use as a base?</h3>
+    <div class="padded-row">
+      <angucomplete id="ex1" placeholder="Enter Food" pause="100" selectedobject="recipe" localdata="titles" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass="highlight" ></angucomplete>
     </div>
-</div>
+    <div class="" ng-show="recipe">
+      You selected <span class="bold-span">{{recipe.originalObject.name}}</span> 
+      Of the ingredients included, which would you not like to see again?
+      <form name="ingredientForm">
+	      <span class="bold-span" ng-repeat="ingredient in recipe.originalObject.ingredients">
+	      	<p class="ingredient">{{ingredient}}<input type="checkbox" name="{{ingredient}}" value="{{ingredient}}"></input></p>
+	      </span>
+	      What ingredient would you be interested in seeing?
+	      <input id="ingredientInput" type="textarea" placeholder="Desired Ingredient"></input>
+	      <input type="submit" value="submit" class="submit-button">
+      </form>
+		</div>
+	</div>
+</div>	

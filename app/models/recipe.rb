@@ -3,6 +3,6 @@ class Recipe
   key :key, Fixnum
   key :title, String
   key :ingredient, String
-  key :ingredient_array, String
+  key :ingredient_array, Array
   key :match, String
 end
