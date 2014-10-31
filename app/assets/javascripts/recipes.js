@@ -16,16 +16,16 @@ $(document).ready(function(){
 
   $('#aaaa').bind('ajax:success', function(){
     recipeListObject = arguments[1]['recipe_list_relations'];
-    console.log(recipeListObject);
     recipeSorter(recipeListObject);
+    matchingRecipeAppend(recipeObject);
     $('form').toggle(500);
 
   });
 
+
   var recipeSorter = function(array){
     recipeObject.displayOrder = [], go = [], ord = [];
     for(var i = 0; i < array.length; i++){
-      console.log(array[i].ingredient_array)
       if((_.intersection(array[i].ingredient_array, recipeObject.stop).length !== 0)){
       } else if((_.intersection(array[i].ingredient_array, recipeObject.go).length !== 0)){
         go.push(array[i])
@@ -35,6 +35,10 @@ $(document).ready(function(){
     recipeObject.displayOrder = _.uniq(newArray);
   }
 
+  var matchingRecipeAppend = function(object){
+    console.log(object)
+    var html = "";
+  }
 });
 
 
@@ -43,9 +47,9 @@ $(document).ready(function(){
 
 
 var app = angular.module('app', ["angucomplete"]);
-app.controller('MainController', ['$scope', '$http',
+  app.controller('MainController', ['$scope', '$http',
     function MainController($scope, $http) {
         $scope.titles = recipeTitles;
     }
-]);
+  ]);
 
