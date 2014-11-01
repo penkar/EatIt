@@ -3,7 +3,6 @@ var recipeListObject = [];
 var recipeSortedArray = []
 
 $(document).ready(function(){
-
   $('.submit-button').on('click', function(){
     recipeObject.stop = [];
     var array = document.forms["ingredientForm"].getElementsByTagName('input');
@@ -13,8 +12,8 @@ $(document).ready(function(){
     recipeObject.go = $('#ingredientInput').val().split(',');
     recipeObject.name = $('#ex1_value').val();
   });
-
-  $('#aaaa').bind('ajax:success', function(){
+  
+  $('#recipeDropDown').bind('ajax:success', function(){
     recipeListObject = arguments[1]['recipe_list_relations'];
     recipeSorter(recipeListObject);
     matchingRecipeAppend(recipeObject);
@@ -33,6 +32,8 @@ $(document).ready(function(){
     }
     var newArray = _.union(go,ord);
     recipeObject.displayOrder = _.uniq(newArray);
+    // update();
+
   }
 
   var matchingRecipeAppend = function(object){
@@ -42,14 +43,22 @@ $(document).ready(function(){
 });
 
 
-
-
-
-
-var app = angular.module('app', ["angucomplete"]);
+(function(){
+  var app = angular.module('app', ["angucomplete"]);
   app.controller('MainController', ['$scope', '$http',
     function MainController($scope, $http) {
         $scope.titles = recipeTitles;
     }
   ]);
+  app.controller('RecipeBuilder', ['$scope', '$http',
+    function RecipeBuilder($scope, $http) {
+      $scope.recipeList = recipeListObject;
+      // var update = function(){
+      //   $scope.$apply(function() {
+      //     $scope.recipeList = recipeListObject;
+      //   });
+      // }
+    }
+  ]);
+})();
 
