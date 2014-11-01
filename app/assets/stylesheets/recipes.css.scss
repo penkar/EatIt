@@ -3,4 +3,22 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 p.ingredient {
 	margin:0;
+	font-size: 1em;
+}
+
+.bodytext p{
+	color:#8a272e;
+}
+input{
+	margin-left: 15px;
+}
+
+.left{
+	width:45%;
+	float:left;
+}
+
+.right{
+	width:45%;
+	float: right;
 }
