@@ -5,7 +5,7 @@ var recipeSortedArray = []
 $(document).ready(function(){
 
   $('.eatItBody').on('click', 'a.matchedRecipeTitle', function(){
-    console.log('clicked')
+    $('ul').hide();
     $(this).next().next().next().toggle(800);
     $(this).next().next().toggle(1200);
   })
@@ -33,8 +33,8 @@ $(document).ready(function(){
     for(var i = 0; i < array.length; i++){
       if((_.intersection(array[i].ingredient_array, recipeObject.stop).length !== 0)){
       } else if((_.intersection(array[i].ingredient_array, recipeObject.go).length !== 0)){
-        go.push(array[i])
-      } else { ord.push(array[i])}
+        go.push(array[i]);
+      } else { ord.push(array[i])};
     }
     var newArray = _.union(go,ord);
     recipeObject.displayOrder = _.uniq(newArray);
