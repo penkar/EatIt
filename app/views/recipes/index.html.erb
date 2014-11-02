@@ -6,7 +6,7 @@
     <div class="padded-row">
       <angucomplete id="ex1" placeholder="Enter Food" pause="100" selectedobject="recipe" localdata="titles" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass="highlight" ></angucomplete>
     </div>
-    <div class="" ng-show="recipe" class="clearfix">
+    <div class="eatItBody" ng-show="recipe" class="clearfix">
       <p>You selected <span class="bold-span">{{recipe.originalObject.name}}</span> </p>
       <form name="ingredientForm" data-remote="true" method="post" action="/find" id="recipeDropDown" >
 	      <div class='left'>
@@ -22,8 +22,8 @@
 		      <input id="ingredientInput" type="textarea" placeholder="Desired Ingredient"></input>
 		      <input type="submit" value="submit" class="submit-button"></input>
 		    </div>
-      </form>
 		</div>
+      </form>
 	</div>
 </div>	
 

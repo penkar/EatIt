@@ -4,10 +4,10 @@ var recipeSortedArray = []
 
 $(document).ready(function(){
 
-  $('a.matchedRecipeTitle').on('click', function(){
+  $('.eatItBody').on('click', 'a.matchedRecipeTitle', function(){
     console.log('clicked')
-    $(this).next().next().next().toggle();
-    $(this).next().next().toggle();
+    $(this).next().next().next().toggle(800);
+    $(this).next().next().toggle(1200);
   })
 
 
@@ -49,10 +49,10 @@ $(document).ready(function(){
       ingredientList = createIngredientListHTML(object[i].ingredient, 'Ingredient')
       html += directionsList
       html += ingredientList
-      $('form').after(html)
+      $('.eatItBody').append(html)
       html = ''
     }
-    $('ul').toggle(600)
+    $('ul').toggle(1000)
   }
 
   var injectJQueryToggle = function(){
