@@ -16,7 +16,7 @@ $(document).ready(function(){
   $('#recipeDropDown').bind('ajax:success', function(){
     recipeListObject = arguments[1]['recipe_list_relations'];
     recipeSorter(recipeListObject);
-    matchingRecipeAppend(recipeObject);
+    matchingRecipeAppend(recipeObject.displayOrder);
     $('form').toggle(500);
 
   });
@@ -32,16 +32,50 @@ $(document).ready(function(){
     }
     var newArray = _.union(go,ord);
     recipeObject.displayOrder = _.uniq(newArray);
-    // update();
-
   }
 
   var matchingRecipeAppend = function(object){
-    console.log(object)
+    console.log(object);
     var html = "";
+    for(var i = 0; i < object.length; i++){
+      html += '<a class="matchedRecipeTitle">'+object[i].title+'</a><br>'
+      directionsList = createDirectionListHTML(object[i].direction, 'Direction')
+      ingredientList = createIngredientListHTML(object[i].ingredient, 'Ingredient')
+      html += directionsList
+      html += ingredientList
+      $('form').after(html)
+      html = ''
+    }
+    $('ul').toggle(600)
   }
-});
 
+  var createIngredientListHTML = function(stringObject, title){
+    var length = (stringObject.length)-4 ;
+    stringObject = stringObject.substr(2,length).split('",')
+    var text = '';
+    text += '<ul class='+title+'>'+ title+':'
+    _.each(stringObject, function(dir) {
+      text+= '<li>'+dir+'</li>'
+    })
+    text += '</ul>'
+    return text
+  }
+
+  var createDirectionListHTML = function(object, title){
+    var text = '';
+    text += '<ul class='+title+'>'+ title+':'
+    _.each(object, function(dir) {
+      text+= '<li>'+dir+'</li>'
+    })
+    text += '</ul>'
+    return text
+  } 
+
+  $('.matchedRecipeTitle').on('click', function(){
+    this.next().toggle();
+    this.next().next().toggle;
+  })
+});
 
 (function(){
   var app = angular.module('app', ["angucomplete"]);
@@ -53,11 +87,6 @@ $(document).ready(function(){
   app.controller('RecipeBuilder', ['$scope', '$http',
     function RecipeBuilder($scope, $http) {
       $scope.recipeList = recipeListObject;
-      // var update = function(){
-      //   $scope.$apply(function() {
-      //     $scope.recipeList = recipeListObject;
-      //   });
-      // }
     }
   ]);
 })();
