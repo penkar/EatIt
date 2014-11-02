@@ -3,6 +3,14 @@ var recipeListObject = [];
 var recipeSortedArray = []
 
 $(document).ready(function(){
+
+  $('a.matchedRecipeTitle').on('click', function(){
+    console.log('clicked')
+    $(this).next().next().next().toggle();
+    $(this).next().next().toggle();
+  })
+
+
   $('.submit-button').on('click', function(){
     recipeObject.stop = [];
     var array = document.forms["ingredientForm"].getElementsByTagName('input');
@@ -18,9 +26,7 @@ $(document).ready(function(){
     recipeSorter(recipeListObject);
     matchingRecipeAppend(recipeObject.displayOrder);
     $('form').toggle(500);
-
   });
-
 
   var recipeSorter = function(array){
     recipeObject.displayOrder = [], go = [], ord = [];
@@ -49,11 +55,15 @@ $(document).ready(function(){
     $('ul').toggle(600)
   }
 
+  var injectJQueryToggle = function(){
+    var jqueryHTML = "<script>$('a.matchedRecipeTitle').on('click', function(){$(this).next().next().next().toggle();$(this).next().next().toggle()})</script>"
+    $('body').after(jqueryHTML);
+  }
+
   var createIngredientListHTML = function(stringObject, title){
     var length = (stringObject.length)-4 ;
     stringObject = stringObject.substr(2,length).split('",')
-    var text = '';
-    text += '<ul class='+title+'>'+ title+':'
+    var text = '<ul class="'+title+'">'+ title+':'
     _.each(stringObject, function(dir) {
       text+= '<li>'+dir+'</li>'
     })
@@ -63,19 +73,16 @@ $(document).ready(function(){
 
   var createDirectionListHTML = function(object, title){
     var text = '';
-    text += '<ul class='+title+'>'+ title+':'
+    text += '<ul class="'+title+'"">'+ title+':'
     _.each(object, function(dir) {
       text+= '<li>'+dir+'</li>'
     })
     text += '</ul>'
     return text
   } 
-
-  $('.matchedRecipeTitle').on('click', function(){
-    this.next().toggle();
-    this.next().next().toggle;
-  })
 });
+
+
 
 (function(){
   var app = angular.module('app', ["angucomplete"]);
