@@ -5,8 +5,8 @@ var recipeSortedArray = []
 $(document).ready(function(){
 
   $('.eatItBody').on('click', 'a.matchedRecipeTitle', function(){
-    $(this).next().next().next().toggle(800);
-    $(this).next().next().toggle(1200);
+    $(this).next().next().toggle(800);
+    $(this).next().toggle(1200);
   })
 
 
@@ -20,12 +20,12 @@ $(document).ready(function(){
     recipeObject.name = $('#ex1_value').val();
   });
   
-  $('#recipeDropDown').bind('ajax:success', function(){
-    recipeListObject = arguments[1]['recipe_list_relations'];
-    recipeSorter(recipeListObject);
-    matchingRecipeAppend(recipeObject.displayOrder);
-    $('form, angucomplete, .base').toggle(3000);
-  });
+  // $('#recipeDropDown').bind('ajax:success', function(){
+  //   recipeListObject = arguments[1]['recipe_list_relations'];
+  //   recipeSorter(recipeListObject);
+  //   matchingRecipeAppend(recipeObject.displayOrder);
+  //   $('form, angucomplete, .base').toggle(3000);
+  // });
 
   var recipeSorter = function(array){
     recipeObject.displayOrder = [], go = [], ord = [];
@@ -38,42 +38,6 @@ $(document).ready(function(){
     var newArray = _.union(go,ord);
     recipeObject.displayOrder = _.uniq(newArray);
   }
-
-  var matchingRecipeAppend = function(object){
-    console.log(object);
-    var html = "";
-    for(var i = 0; i < object.length; i++){
-      html += '<a class="matchedRecipeTitle" href="..." onclick="return false;">'+object[i].title+'</a><br>'
-      directionsList = createDirectionListHTML(object[i].direction, 'Direction')
-      ingredientList = createIngredientListHTML(object[i].ingredient, 'Ingredient')
-      html += directionsList
-      html += ingredientList
-      $('.eatItBody').append(html)
-      html = ''
-    }
-    $('ul').toggle(3000)
-  }
-
-  var createIngredientListHTML = function(stringObject, title){
-    var length = (stringObject.length)-4 ;
-    stringObject = stringObject.substr(2,length).split('",')
-    var text = '<ul class="'+title+'">'+ title+':'
-    _.each(stringObject, function(dir) {
-      text+= '<li>'+dir+'</li>'
-    })
-    text += '</ul>'
-    return text
-  }
-
-  var createDirectionListHTML = function(object, title){
-    var text = '';
-    text += '<ul class="'+title+'"">'+ title+':'
-    _.each(object, function(dir) {
-      text+= '<li>'+dir+'</li>'
-    })
-    text += '</ul>'
-    return text
-  } 
 });
 
 
@@ -82,13 +46,28 @@ $(document).ready(function(){
   var app = angular.module('app', ["angucomplete"]);
   app.controller('MainController', ['$scope', '$http',
     function MainController($scope, $http) {
-        $scope.titles = recipeTitles;
+      $scope.titles = recipeTitles;
+      $scope.recipe = "";
+      $scope.getRecipes = function(){
+        var string = 'http://localhost:3000/finder/'+ $scope.recipe.title;
+        var returnedRecipes = $http.get(string);
+        returnedRecipes.success(function(data){
+          $scope.resultsRecipes = data.recipe_list_relations;
+          
+          for(var i = 0; i < $scope.resultsRecipes.length; i++){
+            var length = ($scope.resultsRecipes[i].ingredient.length)-4;
+            var array = $scope.resultsRecipes[i].ingredient.substr(2,length).split('",')
+            $scope.resultsRecipes[i].ingredient = array
+            console.log($scope.resultsRecipes[i].title)
+          }
+
+
+          $('form, angucomplete, .base').toggle(3000);
+          $('ul').toggle(3000)
+        })
+      }
     }
   ]);
-  app.controller('RecipeBuilder', ['$scope', '$http',
-    function RecipeBuilder($scope, $http) {
-      $scope.recipeList = recipeListObject;
-    }
-  ]);
+
 })();
 

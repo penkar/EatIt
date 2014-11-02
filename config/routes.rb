@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root :to => 'recipes#index'
   get 'index' => 'recipes#index', :as => 'index'
   post 'find' => 'recipes#find', :as => 'find'
+  get 'finder/:title' => 'recipes#finder', :as => 'finder'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
