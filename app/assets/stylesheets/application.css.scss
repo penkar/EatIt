@@ -14,7 +14,7 @@
  *= require_self
  */
 html{
-	background-color: #794798;
+	background-color: #4bfeb1;
 	margin-left: 0;
 	height:100%;
 }
@@ -26,14 +26,15 @@ body{
 	padding-right: 20px;
 	width:900px;
 	margin: 0 auto;
-	background-color: #e3e262;
+	background-color: #acf6f6;
 	main {
 		display:block;
 		overflow:auto;
 	}
 }
 h1,h2 {
-	color:#de6069;
+	color:white;
+	text-shadow: #de6069 2px 2px 2px, #de6069 -2px -2px 2px, #de6069 2px -2px 2px, #de6069 -2px 2px 2px;
 	font-size: 2em;
 	font-family: 'Cantarell', sans-serif;
 	font-style: italic;

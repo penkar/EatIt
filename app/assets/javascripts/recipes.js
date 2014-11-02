@@ -5,7 +5,6 @@ var recipeSortedArray = []
 $(document).ready(function(){
 
   $('.eatItBody').on('click', 'a.matchedRecipeTitle', function(){
-    $('ul').hide();
     $(this).next().next().next().toggle(800);
     $(this).next().next().toggle(1200);
   })
@@ -25,7 +24,7 @@ $(document).ready(function(){
     recipeListObject = arguments[1]['recipe_list_relations'];
     recipeSorter(recipeListObject);
     matchingRecipeAppend(recipeObject.displayOrder);
-    $('form').toggle(500);
+    $('form, angucomplete, .base').toggle(3000);
   });
 
   var recipeSorter = function(array){
@@ -44,7 +43,7 @@ $(document).ready(function(){
     console.log(object);
     var html = "";
     for(var i = 0; i < object.length; i++){
-      html += '<a class="matchedRecipeTitle">'+object[i].title+'</a><br>'
+      html += '<a class="matchedRecipeTitle" href="..." onclick="return false;">'+object[i].title+'</a><br>'
       directionsList = createDirectionListHTML(object[i].direction, 'Direction')
       ingredientList = createIngredientListHTML(object[i].ingredient, 'Ingredient')
       html += directionsList
@@ -52,12 +51,7 @@ $(document).ready(function(){
       $('.eatItBody').append(html)
       html = ''
     }
-    $('ul').toggle(1000)
-  }
-
-  var injectJQueryToggle = function(){
-    var jqueryHTML = "<script>$('a.matchedRecipeTitle').on('click', function(){$(this).next().next().next().toggle();$(this).next().next().toggle()})</script>"
-    $('body').after(jqueryHTML);
+    $('ul').toggle(3000)
   }
 
   var createIngredientListHTML = function(stringObject, title){
