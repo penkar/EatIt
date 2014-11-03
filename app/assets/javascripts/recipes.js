@@ -45,10 +45,14 @@ $(document).ready(function(){
           }
           $('form, angucomplete, .base').toggle(3000);
         })
-        .
-        error(function(){
+        .error(function(){
           console.log('Error occurred on $HTTP call')
         });
+      }
+      $scope.find_ingredient = function(){
+        var string = 'http://localhost:3000/find_ingredient/'+$scope.recipe.title;
+        var returnedIngredientArray = $http.get(string);
+        // returnedIngredientArray
       }
     }
   ]);
