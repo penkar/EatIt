@@ -4,7 +4,7 @@
   <div class="large-padded-row">
   <p class="base">What Dish do you want to use as a base?</p>
     <div class="padded-row">
-      <angucomplete id="ex1" placeholder="Enter Food" pause="100" selectedobject="recipe" localdata="titles" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass="highlight" ></angucomplete>
+      <angucomplete id="ex1" placeholder="Enter Food" pause="100" selectedobject="recipe" localdata="titles" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass="highlight" ng-click="find_ingredient()"></angucomplete>
     </div>
     {{plate}}
     <div class="eatItBody" ng-show="recipe" class="clearfix">
@@ -14,12 +14,12 @@
       		<p>Of the ingredients included, which would you not like to see again?</p>
 	      	<input type="hidden" value="{{recipe.originalObject.name}}" name="recipe_title"></input>
 		      
-		      <span class="bold-span" ng-repeat="ingredient in recipe.originalObject.ingredients">
+		      <span class="bold-span" ng-repeat="ingredient in oneRecipeIngredient">
 		      	<p class="ingredient"><input type="checkbox" name="{{ingredient}}" value="{{ingredient}}"></input>{{ingredient}}</p>
 		      </span>
 		    </div>
 		    <div class='right'>
-		      <p>What ingredient would you be interested in seeing?</p>
+		      <p>What ingredient would you be interested in seeing? (Separate with commas)</p>
 		      <input id="ingredientInput" type="textarea" placeholder="Desired Ingredient"></input>
 		      <button ng-click="getRecipes()" type="submit" value="submit" class="submit-button">Click to Button</button>
 		    </div>

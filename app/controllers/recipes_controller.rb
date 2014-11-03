@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
 	def index
 		@find = 'a'
-		@recipe_title = Recipe.all.map do |x| {name: x.title, ingredients: x.ingredient_array.map!{|x| x.capitalize} } end
+		@recipe_title = Recipe.all.map do |x| {name: x.title} end
 	end
 
 	def find
@@ -14,12 +14,9 @@ class RecipesController < ApplicationController
 	def find_ingredient
 		title = params[:title]
 		title = title.gsub('%20', ' ')
-		puts title; puts title; puts title; puts title;
-		recipe = eval(Recipe.all(:title => title).first.ingredient_array)
-		puts 'hi';puts 'hi';puts 'hi';puts 'hi';
-		puts recipe;puts 'hi';puts 'hi';puts 'hi';puts 'hi';puts 'hi';
-		# recipes = recipe.map{|key| Recipe.all(:key => key).first}
-		# render :json => { recipe_list_relations: recipes }
+		puts title;puts title;
+		array = Recipe.all(:title => title).first.ingredient_array
+		render :json => { recipe_ingredient_array: array }
 	end
 
 	def finder

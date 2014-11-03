@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'index' => 'recipes#index', :as => 'index'
   post 'find' => 'recipes#find', :as => 'find'
   get 'finder/:title' => 'recipes#finder', :as => 'finder'
+  get 'find_ingredient/:title' => 'recipes#find_ingredient', :as => 'find_ingredient'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

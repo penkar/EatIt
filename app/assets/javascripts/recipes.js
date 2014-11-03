@@ -41,18 +41,23 @@ $(document).ready(function(){
           for(var i = 0; i < $scope.resultsRecipes.length; i++){
             var length = ($scope.resultsRecipes[i].ingredient.length)-4;
             var array = $scope.resultsRecipes[i].ingredient.substr(2,length).split('",')
-            $scope.resultsRecipes[i].ingredient = array
+            $scope.resultsRecipes[i].ingredient = array;
           }
           $('form, angucomplete, .base').toggle(3000);
-        })
-        .error(function(){
-          console.log('Error occurred on $HTTP call')
+        }).error(function(){
+          console.log('Error occurred on $HTTP call');
         });
       }
+      $scope.oneRecipeIngredient = []
       $scope.find_ingredient = function(){
-        var string = 'http://localhost:3000/find_ingredient/'+$scope.recipe.title;
-        var returnedIngredientArray = $http.get(string);
-        // returnedIngredientArray
+          var string = 'http://localhost:3000/find_ingredient/'+$scope.recipe.title;
+          var returnedIngredientArray = $http.get(string);
+        returnedIngredientArray.success(function(data){
+          $scope.oneRecipeIngredient = _.values(data)[0];
+          console.log(_.values(data)[0]);
+        }).error(function(){
+          console.log('Error occurred on $HTTP call');
+        });
       }
     }
   ]);
