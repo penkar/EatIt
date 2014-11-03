@@ -29,10 +29,10 @@
 	<div class="eatItBody">
 		<div ng-repeat="recipe in resultsRecipes">
 			<a class="matchedRecipeTitle" href="..." onclick="return false;">{{recipe.title}}:</a>
-			<ul ng-hide="hideFlag">Ingredients:
+			<ul class="list">Ingredients:
 				<span ng-repeat="ingredient in recipe.ingredient"><li class='Ingredient'>{{ingredient}}</li></span>
 			</ul>
-			<ul>Directions: 
+			<ul class="list">Directions: 
 				<span ng-repeat="direction in recipe.direction"><li class='Direction'>{{direction}}</li></span>
 			</ul>
 		</div>

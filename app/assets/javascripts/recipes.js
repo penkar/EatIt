@@ -22,7 +22,7 @@ $(document).ready(function(){
   var app = angular.module('app', ["angucomplete"]);
   app.controller('MainController', ['$scope', '$http',
     function MainController($scope, $http) {
-      $scope.hideFlag = false;
+      // $scope.hideFlag = false;
       $scope.titles = recipeTitles;
       $scope.recipe = "";
       $scope.getRecipes = function(){
@@ -44,12 +44,7 @@ $(document).ready(function(){
             $scope.resultsRecipes[i].ingredient = array
           }
           $('form, angucomplete, .base').toggle(3000);
-          $scope.hideFlag = true;
         })
-        // .
-        // then(function(){
-        //   $('ul').hide(3000)
-        // })
         .
         error(function(){
           console.log('Error occurred on $HTTP call')
