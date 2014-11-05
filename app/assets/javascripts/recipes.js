@@ -13,10 +13,14 @@ $(document).ready(function(){
     for(var i = 0; i < array.length - 1 ; i++){
       if(array[i].checked){recipeObject.stop.push(array[i].value)}
     };
-    recipeObject.go = $('#ingredientInput').val().split(',');
+    recipeObject.go = capitaliseFirstLetter($('#ingredientInput').val()).split(',');
     recipeObject.name = $('#ex1_value').val();
   });
 });
+
+function capitaliseFirstLetter(string){
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 (function(){
   var app = angular.module('app', ["angucomplete"]);
@@ -30,9 +34,6 @@ $(document).ready(function(){
         returnedRecipes.success(function(data){
           recipeObject.displayOrder = [], go = [], ord = [];
           for(var i = 0; i < data.recipe_list_relations.length; i++){
-            console.log(data.recipe_list_relations[i].title)
-            console.log(data.recipe_list_relations[i].ingredient_array)
-            console.log(recipeObject.stop)
             if((_.intersection(data.recipe_list_relations[i].ingredient_array, recipeObject.stop).length !== 0)){
             } else if((_.intersection(data.recipe_list_relations[i].ingredient_array, recipeObject.go).length !== 0)){
               go.push(data.recipe_list_relations[i]);
