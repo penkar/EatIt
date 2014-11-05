@@ -42,7 +42,10 @@ $(document).ready(function(){
             var array = $scope.resultsRecipes[i].ingredient.substr(2,length).split('",')
             $scope.resultsRecipes[i].ingredient = array;
           }
-          $('form, angucomplete, .base').toggle(3000);
+          $('form, angucomplete, .base').toggle(1500);
+          setTimeout(function() {
+            $('ul', '.eatItBody').toggle(1500);
+          }, 100);
         }).error(function(){
           console.log('Error occurred on $HTTP call');
         });
