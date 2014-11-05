@@ -22,7 +22,6 @@ $(document).ready(function(){
   var app = angular.module('app', ["angucomplete"]);
   app.controller('MainController', ['$scope', '$http',
     function MainController($scope, $http) {
-      // $scope.hideFlag = false;
       $scope.titles = recipeTitles;
       $scope.recipe = "";
       $scope.getRecipes = function(){
@@ -61,5 +60,15 @@ $(document).ready(function(){
       }
     }
   ]);
+  app.directive('myCheckBox', function(){
+    return{
+      restrict: 'E',
+      template: '<p ng-class="{active:isChecked}" class="ingredient"><input type="checkbox" ng-model="isChecked" name="{{text}}" value="{{text}}"></input>{{text}}</p>',
+      replace: true,
+      scope:{
+        text: '@'
+      }
+    }
+  })
 })();
 

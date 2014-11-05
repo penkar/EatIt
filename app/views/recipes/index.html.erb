@@ -6,16 +6,14 @@
     <div class="padded-row">
       <angucomplete id="ex1" placeholder="Enter Food" pause="100" selectedobject="recipe" localdata="titles" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small" matchclass="highlight" ng-click="find_ingredient()"></angucomplete>
     </div>
-    {{plate}}
     <div class="eatItBody" ng-show="recipe" class="clearfix">
       <p>You selected <span class="bold-span">{{recipe.originalObject.name}}</span> </p>
       <form name="ingredientForm" data-remote="true" id="recipeDropDown" >
 	      <div class='left'>
       		<p>Of the ingredients included, which would you not like to see again?</p>
 	      	<input type="hidden" value="{{recipe.originalObject.name}}" name="recipe_title"></input>
-		      
 		      <span class="bold-span" ng-repeat="ingredient in oneRecipeIngredient">
-		      	<p class="ingredient"><input type="checkbox" name="{{ingredient}}" value="{{ingredient}}"></input>{{ingredient}}</p>
+		      	<my-check-box text='{{ingredient}}'></my-check-box>
 		      </span>
 		    </div>
 		    <div class='right'>
