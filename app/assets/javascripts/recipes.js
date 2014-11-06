@@ -11,20 +11,35 @@ $(document).ready(function(){
     recipeObject.stop = [];
     var array = document.forms["ingredientForm"].getElementsByTagName('input');
     for(var i = 0; i < array.length - 1 ; i++){
-      if(array[i].checked){recipeObject.stop.push(array[i].value.toLowerCase())}
+      if(array[i].checked){recipeObject.stop.push(array[i].value)}
     };
-    recipeObject.go = $('#ingredientInput').val().split(',');
+    recipeObject.go = capitaliseFirstLetter($('#ingredientInput').val()).split(',');
     recipeObject.name = $('#ex1_value').val();
   });
 });
+
+function capitaliseFirstLetter(string){
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 (function(){
   var app = angular.module('app', ["angucomplete"]);
   app.controller('MainController', ['$scope', '$http',
     function MainController($scope, $http) {
-      // $scope.hideFlag = false;
       $scope.titles = recipeTitles;
       $scope.recipe = "";
+      $scope.restart = function(title){
+        console.log('NEW RECIPE SHOULD APPEAR BELOW', title);
+        var newRecipe = title;
+        $('form, angucomplete, .base').toggle(1500);
+        $scope.startOver = '';
+        $scope.resultsRecipes = [];
+        $scope.oneRecipeIngredient = [];
+        $('#ex1_value').val(newRecipe);
+        $scope.recipe.originalObject.name = newRecipe;
+        $scope.recipe.title = newRecipe;
+        $scope.find_ingredient();
+      }
       $scope.getRecipes = function(){
         var string = 'http://localhost:3000/finder/'+ $scope.recipe.title;
         var returnedRecipes = $http.get(string);
@@ -43,7 +58,10 @@ $(document).ready(function(){
             var array = $scope.resultsRecipes[i].ingredient.substr(2,length).split('",')
             $scope.resultsRecipes[i].ingredient = array;
           }
-          $('form, angucomplete, .base').toggle(3000);
+          $('form, angucomplete, .base').toggle(1500);
+          setTimeout(function() {
+            $('ul', '.eatItBody').toggle(1500);
+          }, 100);
         }).error(function(){
           console.log('Error occurred on $HTTP call');
         });
@@ -61,5 +79,15 @@ $(document).ready(function(){
       }
     }
   ]);
+  app.directive('myCheckBox', function(){
+    return{
+      restrict: 'E',
+      template: '<p ng-class="{active:isChecked}" class="ingredient"><input type="checkbox" ng-model="isChecked" name="{{text}}" value="{{text}}"></input>{{text}}</p>',
+      replace: true,
+      scope:{
+        text: '@'
+      }
+    }
+  })
 })();
 
