@@ -61,18 +61,21 @@ describe Recipebook do
 		expect(cb.cookbook[1][:title]).to eq('Mexican Black Bean Soup')
 		expect(cb.cookbook[2][:title]).to eq('Eggplant and Roasted Garlic Babakanoosh')
 		expect(cb.cookbook.values.size).to eq(3)
-		puts "IT WORKED"
-		puts cb.inspect
 	end
 
-	xit "saves to the database" do
-		db = double
-		results = []
-		def db.insert(hash)
+	it "saves to the database" do
+		cb = Recipebook.new
+		RecipeParser.start_parse('spec/fixtures/test_cookbook.txt', cb)
+		collection = double :results => []
+		def collection.insert(hash)
 			results.push(hash)
 		end
-
-		expect(results.count).to eq 9999
+		cb.send_to_mongodb(collection)
+		expect(collection.results.count).to eq 3
+		expect(collection.results[0][:title]).to eq('Mexican Black Bean Soup')
+		expect(collection.results[1][:ingredient][0]).to eq("1 large head [[garlic]], roasted* (see below)",)
+		expect(collection.results[2][:match]).to eq({})	
+		expect(collection.results[2][:key]).to eq(3)	
 	end
 end
 

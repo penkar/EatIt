@@ -23,9 +23,6 @@ class Recipebook
 		@cookbook[@count] = recipe
 		@cookbook[@count][:match] = Hash.new
 		@cookbook[@count][:ingredient_array] = nil
-		# recipe[:match] = Hash.new
-		# recipe[:ingredient_array] = nil
-		# @cookbook.push(recipe)
 	end
 
 	def titles
@@ -83,6 +80,7 @@ class Recipebook
 	end
 
 	def send_to_mongodb(collection)
+			# binding.pry
 		@cookbook.each do |key,val|
 			hash = {
 				key: key,
@@ -93,6 +91,7 @@ class Recipebook
 				match: val[:match] || []
 			}
 			collection.insert(hash)
+			# binding.pry
 		end
 	end
 end

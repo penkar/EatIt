@@ -28,6 +28,18 @@ function capitaliseFirstLetter(string){
     function MainController($scope, $http) {
       $scope.titles = recipeTitles;
       $scope.recipe = "";
+      $scope.restart = function(title){
+        console.log('NEW RECIPE SHOULD APPEAR BELOW', title);
+        var newRecipe = title;
+        $('form, angucomplete, .base').toggle(1500);
+        $scope.startOver = '';
+        $scope.resultsRecipes = [];
+        $scope.oneRecipeIngredient = [];
+        $('#ex1_value').val(newRecipe);
+        $scope.recipe.originalObject.name = newRecipe;
+        $scope.recipe.title = newRecipe;
+        $scope.find_ingredient();
+      }
       $scope.getRecipes = function(){
         var string = 'http://localhost:3000/finder/'+ $scope.recipe.title;
         var returnedRecipes = $http.get(string);

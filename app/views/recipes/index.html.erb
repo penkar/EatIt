@@ -19,7 +19,7 @@
 		    <div class='right'>
 		      <p>What ingredient would you be interested in seeing? (Separate with commas)</p>
 		      <input id="ingredientInput" type="textarea" placeholder="Desired Ingredient"></input>
-		      <button ng-click="getRecipes()" type="submit" value="submit" class="submit-button">Click to Button</button>
+		      <button ng-click="getRecipes()" type="submit" value="submit" class="submit-button">Click to Begin</button>
 		    </div>
 		</div>
       </form>
@@ -32,6 +32,7 @@
 			</ul>
 			<ul class="list">Directions: 
 				<span ng-repeat="direction in recipe.direction"><li class='Direction'>{{direction}}</li></span>
+			<br>Start Over With <button class='list' ng-click="restart(recipe.title)" type="submit" value="{{recipe.title}}">{{recipe.title}}</button>
 			</ul>
 		</div>
 	</div>
