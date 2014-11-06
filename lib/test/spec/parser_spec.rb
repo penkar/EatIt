@@ -53,5 +53,26 @@ describe Recipebook do
 		result = cookbook.direction_split(recipe1[:directions])
 		expect(result).to eq(["about", "minutes", "until", "translucent"])	
 	end
+
+
+	it "parses a cookbook text file" do
+		cb = Recipebook.new
+		RecipeParser.start_parse('spec/fixtures/test_cookbook.txt', cb)
+		expect(cb.cookbook[1][:title]).to eq('Mexican Black Bean Soup')
+		expect(cb.cookbook[2][:title]).to eq('Eggplant and Roasted Garlic Babakanoosh')
+		expect(cb.cookbook.values.size).to eq(3)
+		puts "IT WORKED"
+		puts cb.inspect
+	end
+
+	xit "saves to the database" do
+		db = double
+		results = []
+		def db.insert(hash)
+			results.push(hash)
+		end
+
+		expect(results.count).to eq 9999
+	end
 end
 

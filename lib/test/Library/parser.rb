@@ -97,38 +97,40 @@ class Recipebook
 	end
 end
 
-def start_parse(cookbook)
-	File.open('cookbook.txt','r') do |x|
-	recipe = {:title=> ''}
-	count = 0
-		while line = x.gets
-			if (!recipe[:directions].nil? && line.gsub(' ','').chomp.length == 0)
-				cookbook.build_recipe(recipe)
-				recipe = {:title=> ''}
-			end
-			if (line.unindent[0..6] =='<title>') && (line.unindent[0..14] != '<title>Category') && (line.unindent[0..10] != '<title>User') && (line.unindent[0..10] != '<title>File')
-				title = line.unindent[7..-10]
-				recipe[:title] = title
-			end
+class RecipeParser
+	
+	def self.start_parse(filename, cookbook)
+		File.open(filename, 'r') do |x|
+			recipe = {:title=> ''}
+			count = 0
+			while line = x.gets
+				if (!recipe[:directions].nil? && line.gsub(' ','').chomp.length == 0)
+					cookbook.build_recipe(recipe)
+					recipe = {:title=> ''}
+				end
+				if (line.unindent[0..6] =='<title>') && (line.unindent[0..14] != '<title>Category') && (line.unindent[0..10] != '<title>User') && (line.unindent[0..10] != '<title>File')
+					title = line.unindent[7..-10]
+					recipe[:title] = title
+				end
 
-			recipe[:ingredients] = [] if(line.unindent[0..16] == "== Ingredients ==")
-			if(line.unindent[0] =='*') && !recipe[:ingredients].nil?
-				recipe[:ingredients].push(line.unindent[2..-1].chomp)
-			end
+				recipe[:ingredients] = [] if(line.unindent[0..16] == "== Ingredients ==")
+				if(line.unindent[0] =='*') && !recipe[:ingredients].nil?
+					recipe[:ingredients].push(line.unindent[2..-1].chomp)
+				end
 
-			recipe[:directions] = [] if(line.unindent[0..15] == "== Directions ==")
-			if(line.unindent[0] =='#') && !recipe[:directions].nil?
-				recipe[:directions].push(line.unindent[2..-1].chomp)
+				recipe[:directions] = [] if(line.unindent[0..15] == "== Directions ==")
+				if(line.unindent[0] =='#') && !recipe[:directions].nil?
+					recipe[:directions].push(line.unindent[2..-1].chomp)
+				end
+			break if count == 14844
+			count += 1
 			end
-		break if count == 14844
-		#76365
-		count += 1
 		end
 	end
 end
-cookbook = Recipebook.new
-start_parse(cookbook)
-# cookbook.titles
-cookbook.build_relations
-cookbook.send_to_mongodb(mongo_collection)
-# coll.find({key:  12}).first['ingredient_array']
+# cookbook = Recipebook.new
+# start_parse(cookbook)
+# # cookbook.titles
+# cookbook.build_relations
+# cookbook.send_to_mongodb(mongo_collection)
+# # coll.find({key:  12}).first['ingredient_array']
