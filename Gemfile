@@ -5,6 +5,8 @@ gem 'mongo_mapper'
 gem 'bson_ext'
 gem 'rspec'
 gem 'pry-byebug'
+gem 'rails_12factor', group: :production
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
