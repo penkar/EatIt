@@ -3,9 +3,12 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 gem 'mongo_mapper'
 gem 'bson_ext'
-gem 'rspec'
-gem 'pry-byebug'
+gem 'rails_12factor', group: :production
 
+group :development, :test do
+	gem 'pry-byebug'
+	gem 'rspec'	
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
