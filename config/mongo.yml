@@ -1,0 +1,22 @@
+defaults: &defaults
+  host: 127.0.0.1
+  port: 27017
+  options:
+    w: 1
+    pool_size: 1
+    slave_ok: false
+    ssl: false
+
+development:
+  <<: *defaults
+  database: eat_it_app_development
+  # database: eat_it_development
+
+test:
+  <<: *defaults
+  database: eat_it_test
+  w: 0
+
+# set these environment variables on your prod server
+production:
+  uri: <%= ENV['MONGODB_URI'] %>
