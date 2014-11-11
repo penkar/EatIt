@@ -41,7 +41,7 @@ function capitaliseFirstLetter(string){
         $scope.find_ingredient();
       }
       $scope.getRecipes = function(){
-        var string = 'http://localhost:3000/finder/'+ $scope.recipe.title;
+        var string = 'https://intense-mesa-9259.herokuapp.com/finder/'+ $scope.recipe.title;
         var returnedRecipes = $http.get(string);
         returnedRecipes.success(function(data){
           recipeObject.displayOrder = [], go = [], ord = [];
@@ -68,7 +68,7 @@ function capitaliseFirstLetter(string){
       }
       $scope.oneRecipeIngredient = []
       $scope.find_ingredient = function(){
-          var string = 'http://localhost:3000/find_ingredient/'+$scope.recipe.title;
+          var string = 'https://intense-mesa-9259.herokuapp.com/find_ingredient/'+$scope.recipe.title;
           var returnedIngredientArray = $http.get(string);
         returnedIngredientArray.success(function(data){
           $scope.oneRecipeIngredient = _.values(data)[0];
