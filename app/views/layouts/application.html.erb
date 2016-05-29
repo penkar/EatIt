@@ -2,28 +2,30 @@
 <html>
 <head>
   <title>EatIT</title>
-	<link href='https://fonts.googleapis.com/css?family=Cantarell:700italic' rel='stylesheet' type='text/css'>
- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Cantarell:700italic' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 
 <body ng-app="app">
-	<div class="clearfix main">
-		<h1>EatIt!</h1>
-		<h2>Exotic Foods & Their Choice Replacements!</h2>
-		<br>
-		
-		<p>For those days you kinda want that <span class="dark-green">Saag Paneer</span>, but why can't I get it without <span class="dark-green">Spinich?</span>
-		<br>
-		
-		<p>	
-		<span class="dark-green">HOW IT WORKS:</span> Give us a food you have had recently. Maybe you liked it, maybe you think there is something better out there and we will help you find a recipe more suited to your taste!<br>
-		</p>
-	<%= yield %>
-	</div>
+  <div class="clearfix main">
+    <h1>EatIt!</h1>
+    <h2>Exotic Foods &amp; Their Choice Replacements!</h2>
+    <br/>
+
+    <p>For those days you kinda want that <span class="dark-green">Saag Paneer</span>, but why can't I get it without <span class="dark-green">Spinich?</span>
+    <br/>
+
+    <p>
+      <span class="dark-green">HOW IT WORKS:</span>
+      Give us a food you have had recently. Maybe you liked it, maybe you think there is something better out there and we will help you find a recipe more suited to your taste!
+      <br/>
+    </p>
+    <%= yield %>
+  </div>
 </body>
 </html>

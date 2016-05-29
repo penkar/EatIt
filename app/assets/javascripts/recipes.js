@@ -6,7 +6,8 @@ $(document).ready(function(){
   $('.eatItBody').on('click', 'a.matchedRecipeTitle', function(){
     $(this).next().next().toggle(800);
     $(this).next().toggle(1200);
-  })
+  });
+
   $('.submit-button').on('click', function(){
     recipeObject.stop = [];
     var array = document.forms["ingredientForm"].getElementsByTagName('input');
@@ -79,6 +80,7 @@ function capitaliseFirstLetter(string){
       }
     }
   ]);
+
   app.directive('myCheckBox', function(){
     return{
       restrict: 'E',
@@ -90,4 +92,3 @@ function capitaliseFirstLetter(string){
     }
   })
 })();
-
