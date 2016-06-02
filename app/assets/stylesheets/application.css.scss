@@ -14,7 +14,6 @@
  *= require_self
  */
 html{
-	background-color: #4bfeb1;
 	margin-left: 0;
 	height:100%;
 }
@@ -23,11 +22,10 @@ body{
 	position: relative;
 	height: auto;
 	min-height: 100%;
-	padding-left: 20px;
-	padding-right: 20px;
+	padding: 20px;
 	width:900px;
 	margin: 0 auto;
-	background-color: #59dbdb;
+	background-color: white;
 	main {
 		display:block;
 		overflow:auto;
@@ -35,11 +33,10 @@ body{
 }
 
 h1,h2 {
-	color:white;
-	text-shadow: #de6069 2px 2px 2px, #de6069 -2px -2px 2px, #de6069 2px -2px 2px, #de6069 -2px 2px 2px;
+	color: gray;
+	// text-shadow: #de6069 2px 2px 2px, #de6069 -2px -2px 2px, #de6069 2px -2px 2px, #de6069 -2px 2px 2px;
 	font-size: 2em;
-	font-family: 'Cantarell', sans-serif;
-	font-style: italic;
+	font-family:sans-serif;
 	margin: 0;
 	text-align: center;
 }
@@ -49,12 +46,12 @@ h2{
 }
 
 p{
-	color:#3A2445;
+	color:black;
 	font-size: 1.25em;
 }
 
 .dark-green{
-	color:#26561E	;
+	color: #1f7488;
 	font-style: italic;
 }
 
